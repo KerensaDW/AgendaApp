@@ -1,0 +1,42 @@
+﻿@{
+    ViewData["Title"] = "Instructies";
+    var timer1 = "MaakDoel";
+    var timer2 = "TeDoen";
+    var timer3 = "EditDoel";
+    var timer4 = "VerwijderDoel";
+    var timer5 = "Logout";
+}
+<div class="container instructies">
+    <h1>@ViewData["Title"]</h1>
+    <div class="">
+        <form method="post" class="algemeenForm">
+            <table>
+                <tbody>
+                    <tr>
+                        <td>Taak 1: Maak het gevraagde doel "Sporten" aan.</td>
+                        <td><button class="btn btn-success" type="submit" asp-action="CreateTimer" asp-route-naam="@timer1">Start!</button></td>
+                    </tr>
+                    <tr>
+                        <td>Taak 2: Voeg de gevraagde "te doen" taakjes toe.</td>
+                        <td><button class="btn btn-success" type="submit" asp-action="CreateTimer" asp-route-naam="@timer2">Start!</button></td>
+                    </tr>
+                    <tr>
+                        <td>Taak 3: Bewerk het doel "Sporten" door een extra dag aan te duiden.</td>
+                        <td><button class="btn btn-success" type="submit" asp-action="CreateTimer" asp-route-naam="@timer3">Start!</button></td>
+                    </tr>
+                    <tr>
+                        <td>Taak 4: Verwijder het doel "Sporten".</td>
+                        <td><button class="btn btn-success" type="submit" asp-action="CreateTimer" asp-route-naam="@timer4">Start!</button></td>
+                    </tr>
+                    <tr>
+                        <td>Taak 5: Log uit.</td>
+                        <td><button class="btn btn-success" type="submit" asp-action="CreateTimer" asp-route-naam="@timer5">Start!</button></td>
+                    </tr>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</div>
+
+
+

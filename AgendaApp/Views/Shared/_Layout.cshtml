@@ -1,0 +1,88 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<Gebruiker> SignInManager
+@inject UserManager<Gebruiker> UserManager
+@{ 
+    var url = Context.Request.Path;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Agendoel</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" /> @*change the css file accordingly*@
+</head>
+<body>
+    <header>
+        <nav class="navbar navbar-expand-sm navbar-toggleable-sm ">
+            @*  *@
+            <div class="container">
+                <a class="navbar-brand" >Agendoel</a>
+                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+                        aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="navbar-collapse collapse d-sm-inline-flex flex-sm-row-reverse">
+
+                    @if (SignInManager.IsSignedIn(User))
+                    {
+                        <ul class="navbar-nav flex-grow-1">
+                            <li class="nav-item @(url.ToString().Contains("Index")? "nav-item--active" : "")">
+                                <a class="nav-link" asp-area="" asp-controller="Home" asp-action="Index">Agenda</a>
+                            </li>
+                            <li class="nav-item @(!url.ToString().Contains("Index") && !url.ToString().Contains("Settings")? "nav-item--active" : "")">
+                                <a class="nav-link " asp-area="" asp-controller="Home" asp-action="Instructions">Instructies</a>
+                            </li>
+                            @if (ViewData["Title"] != null && ViewData["Title"].ToString() == "Instellingen")
+                            {
+                                <partial name="_LoginPartial" />
+                            }
+                            else
+                            {
+                                <li class="nav-item @(url.ToString().Contains("Settings")? "nav-item--active" : "")">
+                                    <a class="nav-link" asp-area="" asp-controller="Settings" asp-action="Settings"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--(Commercial License) Copyright 2022 Fonticons, Inc. --><path d="M272 304h-96C78.8 304 0 382.8 0 480c0 17.67 14.33 32 32 32h384c17.67 0 32-14.33 32-32C448 382.8 369.2 304 272 304zM48.99 464C56.89 400.9 110.8 352 176 352h96c65.16 0 119.1 48.95 127 112H48.99zM224 256c70.69 0 128-57.31 128-128c0-70.69-57.31-128-128-128S96 57.31 96 128C96 198.7 153.3 256 224 256zM224 48c44.11 0 80 35.89 80 80c0 44.11-35.89 80-80 80S144 172.1 144 128C144 83.89 179.9 48 224 48z" /></svg>@User.Identity.Name</a>
+                                </li>
+                            }
+                        </ul>
+                    }
+
+
+                </div>
+            </div>
+        </nav>
+    </header>
+    <div class="maincontainer">
+
+        <main id="main" role="main" class="pb-3">
+            @*<div id="alerts">
+                    @if (TempData["message"] != null)
+                    {
+                        <div class="alert alert-success">@TempData["message"]</div>}
+                    @if (TempData["error"] != null)
+                    {
+                        <div class="alert alert-warning">@TempData["error"]</div>}
+                </div>*@
+            @RenderBody()
+        </main>
+
+    </div>
+
+    <footer class="border-top footer text-muted">
+        <div class="container">
+            &copy; 2022 - Agendoel - <a href="mailto:dewinterkerensa@gmail.com">Contacteer mij</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.js"></script>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @*<script type="text/javascript">
+            setTimeout(() => {
+                const alerts = document.getElementById('alerts');
+                alerts.style.display = 'none';
+            }, 2000);
+        </script>*@
+    @RenderSection("Scripts", required: false)
+</body>
+</html>
